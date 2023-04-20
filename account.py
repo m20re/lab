@@ -22,11 +22,14 @@ class Account:
         :param amount: Increment amt
         :return: boolean value
         """
-        if amount <= 0:
+        try:
+            if amount <= 0:
+                return False
+            else:
+                self.__account_balance += amount
+                return True
+        except TypeError:
             return False
-        else:
-            self.__account_balance += amount
-            return True
     
     def withdraw(self, amount: float) -> bool: 
         """
@@ -34,11 +37,14 @@ class Account:
         :param amount: Decrement amount
         :return: boolean value
         """
-        if amount <= 0 or amount > self.__account_balance:
+        try:
+            if amount <= 0 or amount > self.__account_balance:
+                return False
+            else:
+                self.__account_balance -= amount
+                return True
+        except TypeError:
             return False
-        else:
-            self.__account_balance -= amount
-            return True
     
     def get_balance(self) -> float:
         """
