@@ -36,8 +36,6 @@ def test_deposit():
     testAccount.deposit('Obama')
     assert testAccount.get_balance() == pytest.approx(151.6, abs=0.001)
 
-    
-
 def test_withdraw():
     testAccount = Account('John')
     # checking boolean return - int
@@ -58,4 +56,16 @@ def test_withdraw():
     assert testAccount.withdraw(50.0) is True
     assert testAccount.withdraw(0.0) is False
     assert testAccount.withdraw(-1.1) is False
+    # checking numerical values - float
+    testAccount.deposit(50.0)
+    testAccount.withdraw(24.5)
+    assert testAccount.get_balance() == pytest.approx(25.5, abs=0.001)
+    testAccount.withdraw(0.5)
+    assert testAccount.get_balance() == pytest.approx(25.0, abs=0.001)
+    testAccount.deposit(-1.1)
+    assert testAccount.get_balance() == pytest.approx(25.0, abs=0.001)
+    # checking string values 
+    assert testAccount.withdraw('Obama') is False
+    testAccount.withdraw('Obama')
+    assert testAccount.get_balance() == pytest.approx(25.0, abs=0.001)
     
